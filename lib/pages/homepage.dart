@@ -1,8 +1,12 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:todoapp/pages/addnotepage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,16 +19,25 @@ class _HomePageState extends State<HomePage> {
   Widget _buildNote(int index) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 25.0),
-      child: ListTile(
-        title: Text('Note Title'),
-        subtitle: Text('June 7, 2023 - High'),
-        trailing: Checkbox(
-          onChanged: (value) {
-            print(value);
-          },
-          activeColor: Theme.of(context).primaryColor,
-          value: true,
-        ),
+      child: Column(
+        children: [
+          ListTile(
+            title: Text('Note Title'),
+            subtitle: Text('June 7, 2023 - High'),
+            trailing: Checkbox(
+              onChanged: (value) {
+                print(value);
+              },
+              activeColor: Theme.of(context).primaryColor,
+              value: true,
+            ),
+          ),
+          Divider(
+            height: 5.0,
+            color: Colors.deepPurple,
+            thickness: 2.0,
+          ),
+        ],
       ),
     );
   }
@@ -35,7 +48,10 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.blueAccent,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, CupertinoPageRoute(builder: (_) => AddNotePage()));
+        },
         child: Icon(Icons.add),
       ),
       body: ListView.builder(
