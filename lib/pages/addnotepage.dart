@@ -129,7 +129,23 @@ class _AddNotePageState extends State<AddNotePage> {
                           },
                           value: _priority,
                         ),
-                      )
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 20.0),
+                        height: 60.0,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            borderRadius: BorderRadius.circular(30.0)),
+                        child: ElevatedButton(
+                          child: Text(
+                            btnText,
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 20.0),
+                          ),
+                          onPressed: () {},
+                        ),
+                      ),
                     ],
                   ),
                 )
