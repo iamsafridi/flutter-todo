@@ -25,11 +25,10 @@ class Note {
 
   factory Note.fromMap(Map<String, dynamic> map) {
     return Note.withId(
-      id: map['id'],
-      title: map['title'],
-      date: DateTime.parse(map['date']),
-      priotity: map['priority'],
-      status: map['status'],
-    );
+        id: map['id'],
+        title: map['title'],
+        date: DateTime.parse(map['date']),
+        priotity: map['priority'],
+        status: map['status']);
   }
 }

@@ -60,11 +60,9 @@ class DatabaseHelper {
 
   Future<int> insertNote(Note note) async {
     Database? db = await this.db;
-    final int result = await db!.update(
+    final int result = await db!.insert(
       noteTable,
       note.toMap(),
-      where: '$colId = ?',
-      whereArgs: [note.id],
     );
     return result;
   }
@@ -74,7 +72,7 @@ class DatabaseHelper {
     final int result = await db!.update(
       noteTable,
       note.toMap(),
-      where: '$colId =?',
+      where: '$colId = ?',
       whereArgs: [note.id],
     );
     return result;

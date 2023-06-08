@@ -13,8 +13,6 @@ import 'package:todoapp/pages/addnotepage.dart';
 import '../models/notemodel.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -72,13 +70,14 @@ class _HomePageState extends State<HomePage> {
               value: note.status == 1 ? true : false,
             ),
             onTap: () => Navigator.push(
-                context,
-                CupertinoPageRoute(
-                    builder: (_) => AddNotePage(
-                          updateNoteList: null,
-                          // updateNoteList: _updateNoteList(),
-                          // note: note,
-                        ))),
+              context,
+              CupertinoPageRoute(
+                builder: (_) => AddNotePage(
+                  updateNoteList: _updateNoteList,
+                  note: note,
+                ),
+              ),
+            ),
           ),
           Divider(
             height: 5.0,
@@ -109,21 +108,21 @@ class _HomePageState extends State<HomePage> {
         ),
         body: FutureBuilder(
             future: _noteList,
-            builder: (context, AsyncSnapshot snapShot) {
-              if (!snapShot.hasData) {
+            builder: (context, AsyncSnapshot snapshot) {
+              if (!snapshot.hasData) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
               }
 
-              final int completeNoteCount = snapShot.data!
+              final int completeNoteCount = snapshot.data!
                   .where((Note note) => note.status == 1)
                   .toList()
                   .length;
 
               return ListView.builder(
                 padding: EdgeInsets.symmetric(vertical: 80.0),
-                itemCount: int.parse(snapShot.data!.length.toString()) + 1,
+                itemCount: int.parse(snapshot.data!.length.toString()) + 1,
                 itemBuilder: (BuildContext context, int index) {
                   if (index == 0) {
                     return Padding(
@@ -144,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                             height: 10.0,
                           ),
                           Text(
-                            '$completeNoteCount of ${snapShot.data.length}',
+                            '$completeNoteCount of ${snapshot.data.length}',
                             style: TextStyle(
                               color: Colors.deepPurple,
                               fontSize: 20.0,
@@ -155,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     );
                   }
-                  return _buildNote(snapShot.data![index - 1]);
+                  return _buildNote(snapshot.data![index - 1]);
                 },
               );
             }));
