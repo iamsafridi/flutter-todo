@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:todoapp/pages/homepage.dart';
 
 class AddNotePage extends StatefulWidget {
-  const AddNotePage({super.key});
+  const AddNotePage({super.key, required updateNoteList});
 
   @override
   State<AddNotePage> createState() => _AddNotePageState();
